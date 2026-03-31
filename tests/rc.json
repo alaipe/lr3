@@ -1,0 +1,31 @@
+{
+    "description": "Последовательная RC цепь",
+    "dt": 0.00005,
+    "nodes": 3,
+    "elements": [
+        {
+            "type": "V",
+            "branch": 0,
+            "node_begin": 0,
+            "node_end": 1,
+            "voltage": 10,
+            "frequency": 0,
+            "phase_deg": 0,
+            "r_internal": 0.001
+        },
+        {
+            "type": "R",
+            "branch": 1,
+            "node_begin": 1,
+            "node_end": 2,
+            "R": 1000
+        },
+        {
+            "type": "C",
+            "branch": 2,
+            "node_begin": 2,
+            "node_end": 0,
+            "C": 0.00001
+        }
+    ]
+}
