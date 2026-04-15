@@ -3,7 +3,7 @@ import numpy
 from components.elements import Resistor, Inductor, Capacitor, VoltageSource, CurrentSource
 
 def make_component(cfg:dict, dt:float):
-    t=cfg["type"]
+    t=cfg["type"] #словарь cfg, содержащий информацию о конкретном элементе, обращение к ключу type
     b=cfg["branch"]
     nb=cfg["node_begin"]
     ne=cfg["node_end"]
@@ -20,7 +20,7 @@ def make_component(cfg:dict, dt:float):
 
 def parse(path:str):
     with open(path, "r", encoding="utf-8") as f:
-        data=json.load(f)
+        data=json.load(f) #возвращает словарь
     dt=float(data["dt"]) #шаг расчета
     n_nodes=int(data["nodes"]) #количество узлов, !включая землю!
     n_free_nodes=n_nodes-1 #количество узлов, !не включая землю!
@@ -28,7 +28,7 @@ def parse(path:str):
     for element_json in data["elements"]: #для каждого отдельного элемента в json файле
         components.append(make_component(element_json, dt)) #добавить элемент из json в список
     n_branches = len(components) #количество ветвей
-    #Матрица инцидентности A (ветви X (узлы-1) т.к. отсчет от 0 в python) столбцы - номер ветви, строки - номер узла
+    #Матрица инцидентности A (ветви X (узлы-1) т.к. отсчет от 0 в python) столбцы - номер ветви, строки - номер узла #оказалась транспонированной
     A=numpy.zeros((n_branches,n_free_nodes),dtype=int) #создает матрицу, заполненную нулями
     for i, element in enumerate(components): #enumerate создает пару счетчик-значение, идем по ветвям i(по каждому элементу из json)
         nb=element.get_node_begin() #значение начального узла для i-го элемента (ветви)

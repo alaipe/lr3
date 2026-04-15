@@ -27,7 +27,7 @@ class DommelSolver:
         right_side_eq = -self.A.T@(J+self.Y@E) #-A*(J+YE)
         #Решаем СЛАУ: G*U0=right_side_eq
         U0=numpy.linalg.solve(self.G,right_side_eq) #решает A*x=B
-        #уравнение ветви: E=R_eq*I+U=>I=Y*(E-U)
+        #уравнение ветви: U=R_eq*I-E=>I=Y*(E+U)
         U_branch=self.A@U0 #(nb, 1)
         I_branch=self.Y@(E+U_branch)+J #(nb, 1)
         I_branch=I_branch.flatten() #(nb) #столбец -> список

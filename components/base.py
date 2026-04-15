@@ -8,12 +8,12 @@ class Component(ABC):
         self.fi_end=0 #потенциал конечного узла
         self.current=0 #ток через ветвь
 
-    @abstractmethod
-    def get_E(self)->float: #I_hist
+    @abstractmethod #абстрактный метод - классы-наследники сами должны определить, как данная функция реализуется. причем классы-наследники обязаны определить его, иначе будет ошибка
+    def get_E(self)->float:
         pass
 
     @abstractmethod
-    def get_R(self)->float: #R for G=1/R
+    def get_R(self)->float:
         pass
 
     def set_fi_begin(self,value:float):
@@ -34,5 +34,5 @@ class Component(ABC):
         return self.fi_begin
     def get_fi_end(self)->float:
         return self.fi_end
-    def __repr__(self): #вывод в виде "Название класса, ветвь=номер_ветви, узлы=начало->конец"
+    def __repr__(self): #строковое представление объекта в удобночитаемом формате "Название класса, ветвь=номер_ветви, узлы=начало->конец"
         return (f"{self.__class__.__name__}, ветвь={self.branch}, узлы={self.node_begin}->{self.node_end}")
