@@ -33,16 +33,18 @@ def run(cfg_path:str,n_steps:int):
 
 def main(n_steps:int):
     tests_dir=Path(__file__).parent / "tests"
-    configs=[("r_series.json",n_steps),("r_parallel.json",n_steps),("rc.json",n_steps),("rl.json",n_steps),("rlc_series.json",n_steps)]
+    configs=[("r_series.json",n_steps),("r_parallel.json",n_steps)]
     for filename,steps in configs:
         path=str(tests_dir/filename)
         print(f"Тест: {filename}")
         run(path,steps)
 
 '''Задай количество точек!'''
-n_steps=15
-tests_dir = Path(__file__).parent / "tests"
+n_steps=5
+main(n_steps)
 
+tests_dir = Path(__file__).parent / "tests"
+print(f"Тест: rl.json")
 t, I, U0, dt = run(str(tests_dir / "rl.json"), n_steps)
 
 R, L, r_int, V = 100, 0.01, 0.001, 10
@@ -87,6 +89,7 @@ plt.tight_layout()
 plt.savefig(Path(__file__).resolve().parent / "rl_series.png", dpi=120)
 plt.close()
 
+print(f"Тест: rc.json")
 t, I, U0, dt = run(str(tests_dir / "rc.json"), n_steps)
 
 R, C, r_int, V = 1000, 0.00001, 0.001, 10
@@ -131,6 +134,7 @@ plt.tight_layout()
 plt.savefig(Path(__file__).resolve().parent / "rc_series.png", dpi=120)
 plt.close()
 
+print(f"Тест: rlc_series.json")
 t, I, U0, dt = run(str(tests_dir / "rlc_series.json"), n_steps)
 
 R, L, C, r_int, V = 10, 0.01, 0.0001, 0.001, 10
