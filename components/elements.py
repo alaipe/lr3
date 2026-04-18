@@ -13,8 +13,6 @@ class Resistor(Component):
         return 0
     def update(self):
         pass #Не нужно, так как резистор
-    def __repr__(self):
-        return(f"Резистор, ветвь={self.branch}, узлы={self.node_begin}->{self.node_end}, R={self.R} Ом")
 
 class Inductor(Component):
     def __init__(self,branch,node_begin,node_end,L,dt):
@@ -32,8 +30,6 @@ class Inductor(Component):
         G=self.dt/(2*self.L) #G=1/R=dt/(2L)
         U_L=self.fi_begin-self.fi_end #Uln=fi_begin-fi_end
         self.E_L=(2*self.L)/self.dt*self.current+U_L #El=2L/dt*Iln+Uln
-    def __repr__(self):
-        return (f"Индуктивность, ветвь={self.branch}, узлы={self.node_begin}->{self.node_end}, L={self.L} Гн")
 
 class Capacitor(Component):
     def __init__(self,branch,node_begin,node_end,C,dt):
@@ -51,8 +47,6 @@ class Capacitor(Component):
         G=2*self.C/self.dt #G=1/R=2C/dt
         U_C=self.fi_begin-self.fi_end #UCn=fi_begin-fi_end
         self.E_C=-(self.dt/(2*self.C)*self.current+U_C) #Ec=-(h/(2C)*Icn+Ucn)
-    def __repr__(self):
-        return (f"Конденсатор, ветвь={self.branch}, узлы={self.node_begin}->{self.node_end}, C={self.C} Ф")
 
 class VoltageSource(Component):
     def __init__(self,branch,node_begin,node_end,voltage,frequency=0,phase_degree=0,r_internal=1e-10):
@@ -76,8 +70,6 @@ class VoltageSource(Component):
         self.time=t
     def update(self):
         pass
-    def __repr__(self):
-        return (f"Источник напряжения, ветвь={self.branch}, узлы={self.node_begin}->{self.node_end}, V={self.volt} В")
 
 class CurrentSource(Component):
     def __init__(self,branch,node_begin,node_end,current): #Источник тока не может быть переменным
@@ -91,5 +83,3 @@ class CurrentSource(Component):
         return self.J0
     def update(self):
         pass
-    def __repr__(self):
-        return (f"Источник тока, ветвь={self.branch}, узлы={self.node_begin}->{self.node_end}, J={self.J0} А")
